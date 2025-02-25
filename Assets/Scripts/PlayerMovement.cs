@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public int maxJumps = 2;
+    private int jumpsRemaining;
     bool readyToJump;
 
     [Header("Keybinds")]
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
+        ResetJumps();
     }
  
     private void Update()
@@ -43,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
+            ResetJumps();
             rb.linearDamping = groundDrag;
         } 
         else 
@@ -61,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(jumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsRemaining > 1)
         {
             readyToJump = false;
             Jump();
@@ -98,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        jumpsRemaining--;
+
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
@@ -105,6 +111,11 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void ResetJumps()
+    {
+        jumpsRemaining = maxJumps;
     }
 
 }
