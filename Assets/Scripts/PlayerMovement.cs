@@ -23,10 +23,11 @@ public class PlayerMovement : MonoBehaviour
     bool grounded;
 
 
-    public Transform orientation; 
+    public Transform orientation;
     float horizontalInput;
     float verticalInput;
-    Vector3 moveDirection;
+    public Vector3 moveDirection;
+    public bool isDashing = false;
     Rigidbody rb;
 
 
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         ResetJumps();
     }
- 
+
     private void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -48,8 +49,8 @@ public class PlayerMovement : MonoBehaviour
         {
             ResetJumps();
             rb.linearDamping = groundDrag;
-        } 
-        else 
+        }
+        else
         {
             rb.linearDamping = 0;
         }
@@ -73,31 +74,35 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void MovePlayer(Vector3 direction)
+    {
+        if (grounded)
+        {
+            rb.AddForce(direction.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
+        else
+        {
+            rb.AddForce(direction.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+    }
+
+
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        if (grounded)
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        }
-
-        else if (!grounded)
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-        }
-        
+        MovePlayer(moveDirection);
     }
 
     private void SpeedControl()
     {
-         Vector3 flatVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        if (isDashing) return;
+        Vector3 flatVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-         if (flatVelocity.magnitude > moveSpeed)
-         {
+        if (flatVelocity.magnitude > moveSpeed)
+        {
             Vector3 limitedVelocity = flatVelocity.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVelocity.x, rb.linearVelocity.y, limitedVelocity.z);
-         }
+        }
     }
 
     private void Jump()
@@ -117,5 +122,4 @@ public class PlayerMovement : MonoBehaviour
     {
         jumpsRemaining = maxJumps;
     }
-
 }

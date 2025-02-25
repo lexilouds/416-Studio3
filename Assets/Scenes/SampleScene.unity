@@ -2193,6 +2193,7 @@ GameObject:
   - component: {fileID: 1789235202}
   - component: {fileID: 1789235203}
   - component: {fileID: 1789235204}
+  - component: {fileID: 1789235205}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2261,12 +2262,15 @@ MonoBehaviour:
   jumpForce: 10
   jumpCooldown: 0.25
   airMultiplier: 0.2
+  maxJumps: 2
   jumpKey: 32
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
   orientation: {fileID: 773349990}
+  moveDirection: {x: 0, y: 0, z: 0}
+  isDashing: 0
 --- !u!114 &1789235204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,6 +2284,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 1644936440}
+--- !u!114 &1789235205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789235200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e29847609f1e4f0aa209395538bb641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashSpeed: 20
+  dashTime: 0.35
+  dashCooldown: 1
 --- !u!1 &1795231160
 GameObject:
   m_ObjectHideFlags: 0
