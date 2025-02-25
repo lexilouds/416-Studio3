@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 409017565}
   - component: {fileID: 409017564}
   - component: {fileID: 409017563}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.8544, y: 0, z: -9.0521}
-  m_LocalScale: {x: 3.4738958, y: 1, z: 3.7054553}
+  m_LocalScale: {x: 8.531737, y: 1, z: 9.374432}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -864,6 +864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789235201}
   - component: {fileID: 1789235202}
+  - component: {fileID: 1789235203}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -896,7 +897,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789235200}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -915,6 +916,29 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &1789235203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789235200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a806edab37b874c62a41fcab72a390df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  groundDrag: 5
+  jumpForce: 12
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  jumpKey: 32
+  playerHeight: 2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
+  orientation: {fileID: 773349990}
 --- !u!1 &2104607403
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,7 +967,7 @@ Transform:
   m_GameObject: {fileID: 2104607403}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.06, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -956,7 +980,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104607403}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: de1a8add510c84db89db7c80a5157744, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
